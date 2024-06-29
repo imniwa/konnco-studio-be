@@ -41,12 +41,11 @@ CREATE TABLE "products" (
 
 -- CreateTable
 CREATE TABLE "cart" (
-    "id" BIGSERIAL NOT NULL,
     "customerId" TEXT NOT NULL,
     "productId" BIGINT NOT NULL,
     "qty" INTEGER NOT NULL,
 
-    CONSTRAINT "cart_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "cart_pkey" PRIMARY KEY ("customerId","productId")
 );
 
 -- CreateTable

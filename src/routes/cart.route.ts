@@ -7,4 +7,4 @@ router.post('/', cartController.addProduct2Cart)
 router.put('/', cartController.updateProductFromCart)
 router.delete('/', cartController.deleteProductFromCart)
 
-export { router as cartRouter }
+export { router as cartRoute }

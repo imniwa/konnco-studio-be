@@ -4,7 +4,26 @@ import type { Request, Response } from "express"
 import { z } from "zod"
 
 export async function getAllProduct(req: Request, res: Response) {
-    const products = await prisma.products.findMany()
+    const products = await prisma.products.findMany({
+        orderBy: {
+            id: "desc"
+        }
+    })
+    return sendResponse(res, 200, products.map((product) => ({
+        ...product,
+        id: String(product.id),
+    })))
+}
+
+export async function getActiveProduct(req: Request, res: Response){
+    const products = await prisma.products.findMany({
+        where: {
+            isAvailable: true
+        },
+        orderBy: {
+            id: "desc"
+        }
+    })
     return sendResponse(res, 200, products.map((product) => ({
         ...product,
         id: String(product.id),

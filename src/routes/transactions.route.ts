@@ -7,4 +7,4 @@ router.get('/:id', transactionController.getTransactionDetails)
 router.post('/', transactionController.createTransaction)
 router.put('/', transactionController.updateTransaction)
 
-export { router as cartRouter }
+export { router as transactionRoute }

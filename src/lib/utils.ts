@@ -9,7 +9,7 @@ import * as jose from 'jose'
 const secret = new TextEncoder().encode(process.env.SECRET)
 
 export const prisma = new PrismaClient({
-    log: ['query', 'info']
+    // log: ['query', 'info']
 });
 
 export function hashPass(password: string): string {

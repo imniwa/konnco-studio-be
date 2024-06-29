@@ -19,9 +19,12 @@ export async function RoleMiddleware(
     try {
         const payload = await verifyJWT(token);
         if (!payload) return sendResponse(res, 401, "Unauthorized")
-        if (req.originalUrl.includes('products')
+        if (req.originalUrl.includes("/admin")
             && payload.role !== "admin") {
             return sendResponse(res, 403, "Forbidden")
+        }
+        if (payload.role == "customer") {
+            req.headers['userId'] = payload.data?.id
         }
         next();
     } catch (error) {
