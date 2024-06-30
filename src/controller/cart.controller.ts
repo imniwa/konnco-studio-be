@@ -10,7 +10,7 @@ export async function getAllCart(req: Request, res: Response) {
             id: userId as string
         }
     })
-    if (!user) return sendResponse(res, 404, "User not found")
+    if (!user) return sendResponse(res, 401)
     const cart = await prisma.cart.findMany({
         select: {
             customerId: false,
@@ -44,7 +44,7 @@ export async function addProduct2Cart(req: Request, res: Response) {
             id: userId as string
         }
     })
-    if (!user) return sendResponse(res, 404, "User not found")
+    if (!user) return sendResponse(res, 401)
 
     const bodySchema = z.object({
         productId: z.number().or(z.string().transform((val, ctx) => {
@@ -135,7 +135,7 @@ export async function updateProductFromCart(req: Request, res: Response) {
             id: userId as string
         }
     })
-    if (!user) return sendResponse(res, 404, "User not found")
+    if (!user) return sendResponse(res, 401)
     const bodySchema = z.object({
         productId: z.number().or(z.string().transform((val, ctx) => {
             if(isNaN(Number(val))) return ctx.addIssue({
@@ -226,7 +226,7 @@ export async function deleteProductFromCart(req: Request, res: Response) {
             id: userId as string
         }
     })
-    if (!user) return sendResponse(res, 404, "User not found")
+    if (!user) return sendResponse(res, 401)
     const { productId } = req.body
     const product = await prisma.products.findFirst({
         where: {

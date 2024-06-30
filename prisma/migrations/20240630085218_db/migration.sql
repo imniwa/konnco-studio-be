@@ -64,7 +64,7 @@ CREATE TABLE "transactions" (
     "id" BIGSERIAL NOT NULL,
     "customerId" TEXT NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
-    "channel" TEXT NOT NULL,
+    "channel" TEXT,
     "status" TEXT NOT NULL,
     "midtransOrderId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -81,6 +81,9 @@ CREATE UNIQUE INDEX "customers_username_key" ON "customers"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "customers_email_key" ON "customers"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "transactions_midtransOrderId_key" ON "transactions"("midtransOrderId");
 
 -- AddForeignKey
 ALTER TABLE "cart" ADD CONSTRAINT "cart_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
